@@ -37,7 +37,7 @@ type ErrorResponse struct {
 // @Success      200  {object}  map[string]interface{}  "成功返回示例：{'status': 'success', 'path': '/uploads/123.jpg'}"
 // @Failure      400  {object}  map[string]interface{}  "错误示例：{'error': 'File too large'}"
 // @Failure      500  {object}  map[string]interface{}  "错误示例：{'error': 'Failed to save file'}"
-// @Router       /upload [post]
+// @Router       /uploadFile/uploadNftFile [post]
 func UploadHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 获取上传的文件

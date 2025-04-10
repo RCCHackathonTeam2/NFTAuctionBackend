@@ -514,7 +514,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/upload": {
+        "/uploadFile/uploadNftFile": {
             "post": {
                 "description": "接收用户上传的附件（图片、视频等）并保存到本地",
                 "consumes": [

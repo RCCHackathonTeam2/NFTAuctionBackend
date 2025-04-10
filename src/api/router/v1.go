@@ -58,9 +58,9 @@ func loadV1(r *gin.Engine, svcCtx *svc.ServerCtx) {
 	}
 
 	uploadFile := apiV1.Group("/uploadFile")
-	uploadFile.Use(middleware.AuthMiddleWare(svcCtx.KvStore))
+	//uploadFile.Use(middleware.AuthMiddleWare(svcCtx.KvStore))
 	{
-		uploadFile.POST("/uploadNftFile", middleware.AuthMiddleWare(svcCtx.KvStore), v1.UploadHandler(svcCtx))
+		uploadFile.POST("/uploadNftFile", v1.UploadHandler(svcCtx))
 	}
 
 	auctions := apiV1.Group("/auctions")

@@ -368,7 +368,7 @@ paths:
       summary: 批量查询出价信息
       tags:
       - user
-  /upload:
+  /uploadFile/uploadNftFile:
     post:
       consumes:
       - multipart/form-data
