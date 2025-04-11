@@ -2,7 +2,6 @@ package v1
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/v1"
 	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/types/v1"
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/errcode"
@@ -543,7 +542,7 @@ type CreateNftRequest struct {
 // @Param description query string true "NFT描述"
 // @Param imageUrl query string true "NFT图片URL"
 // @Param royaltyPercentage query string true "版税百分比"
-// @Param chainId query string true "所属区块链网络id"
+// @Param chainId query int true "所属区块链网络id"
 // @Param categorieId query string true "类别id"
 // @Success 200 {object} interface{} "出价信息列表"
 // @Failure 400 {object} errcode.Error "参数错误"
@@ -552,8 +551,7 @@ type CreateNftRequest struct {
 func CreateNft(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		req := new(CreateNftRequest)
-		fmt.Println("我看req", req)
+		//req := new(CreateNftRequest)
 		name := c.Query("name")
 		if name == "" {
 			xhttp.Error(c, errcode.NewCustomErr("name param is nil."))

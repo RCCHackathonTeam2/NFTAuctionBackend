@@ -26,7 +26,7 @@ func getUserLoginMsgCacheKey(address string) string {
 	return middleware.CR_LOGIN_MSG_KEY + ":" + strings.ToLower(address)
 }
 
-func getUserLoginTokenCacheKey(address string) string {
+func GetUserLoginTokenCacheKey(address string) string {
 	return middleware.CR_LOGIN_KEY + ":" + strings.ToLower(address)
 }
 
@@ -85,7 +85,7 @@ func UserLogin(ctx context.Context, svcCtx *svc.ServerCtx, req types.LoginReq) (
 	}
 
 	// 生成用户token
-	tokenKey := getUserLoginTokenCacheKey(req.Address)
+	tokenKey := GetUserLoginTokenCacheKey(req.Address)
 	userToken, err := AesEncryptOFB([]byte(tokenKey), []byte(middleware.CR_LOGIN_SALT))
 	if err != nil {
 		return nil, errors.Wrap(err, "failed on get user token")
@@ -110,6 +110,15 @@ func CacheUserToken(svcCtx *svc.ServerCtx, tokenKey, token string) error {
 	}
 
 	return nil
+}
+
+func GetCacheUserToken(svcCtx *svc.ServerCtx, tokenKey string) (string, error) {
+	token, err := svcCtx.KvStore.Get(tokenKey)
+	if err != nil {
+		return "", fmt.Errorf("failed to get token from cache: %v", err)
+	}
+
+	return token, nil
 }
 
 func AesEncryptOFB(data []byte, key []byte) ([]byte, error) {
