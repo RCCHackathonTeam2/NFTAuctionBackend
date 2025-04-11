@@ -581,13 +581,13 @@ func CreateNft(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 			return
 		}
 
-		categorieId, err := strconv.ParseInt(c.Query("categorieId"), 10, 32)
-		if err != nil {
-			xhttp.Error(c, errcode.ErrInvalidParams)
+		categorieId := c.Query("categorieId")
+		if categorieId == "" {
+			xhttp.Error(c, errcode.NewCustomErr("categorieId param is nil."))
 			return
 		}
 
-		res, err := service.CreateNft(c.Request.Context(), svcCtx, int(chainId), int(categorieId), royaltyPercentage, imageUrl, description, name)
+		res, err := service.CreateNft(c.Request.Context(), svcCtx, int(chainId), categorieId, royaltyPercentage, imageUrl, description, name)
 		if err != nil {
 			xhttp.Error(c, errcode.ErrUnexpected)
 			return

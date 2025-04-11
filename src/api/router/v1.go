@@ -36,7 +36,7 @@ func loadV1(r *gin.Engine, svcCtx *svc.ServerCtx) {
 
 		collections.GET("/ranking", middleware.CacheApi(svcCtx.KvStore, 60), v1.TopRankingHandler(svcCtx)) // 获取NFT集合排名信息
 
-		collections.POST("/createNft", v1.CreateNft(svcCtx))
+		collections.POST("/createNft", v1.CreateNft(svcCtx)) // 获取NFT集合排名信息
 	}
 
 	activities := apiV1.Group("/activities")
