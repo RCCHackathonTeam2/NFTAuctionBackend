@@ -27,13 +27,11 @@ func AuctionsHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 			return
 		}
 
-		res, err := service.GetAuctions(c.Request.Context(), svcCtx, filter.Category, filter.AuctionType, filter.ChainId, filter.MinPrice, filter.MaxPrice, filter.Page, filter.PageSize)
+		res, err := service.GetAuctions(c.Request.Context(), svcCtx, filter.Category, filter.AuctionType, filter.ChainId, filter.MinPrice, filter.MaxPrice, filter.OrderBy, filter.Page, filter.PageSize)
 		if err != nil {
 			xhttp.Error(c, errcode.NewCustomErr(err.Error()))
 			return
 		}
-		xhttp.OkJson(c, struct {
-			Result interface{} `json:"result"`
-		}{Result: res})
+		xhttp.OkJson(c, res)
 	}
 }

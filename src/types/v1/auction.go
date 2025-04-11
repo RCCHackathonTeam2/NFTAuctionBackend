@@ -5,13 +5,14 @@ import (
 )
 
 type AuctionsParam struct {
-	Category    string  `json:"category"`
-	AuctionType string  `json:"auction_type"`
-	ChainId     int     `json:"chain_id"`
-	MinPrice    float32 `json:"min_price"`
-	MaxPrice    float32 `json:"max_price"`
-	Page        int     `json:"page"`
-	PageSize    int     `json:"page_size"`
+	Category    string   `json:"category"`
+	AuctionType []string `json:"auction_type"`
+	ChainId     []int    `json:"chain_id"`
+	MinPrice    float32  `json:"min_price"`
+	MaxPrice    float32  `json:"max_price"`
+	OrderBy     string   `json:"order_by"`
+	Page        int      `json:"page"`
+	PageSize    int      `json:"page_size"`
 }
 
 type Auctions struct {
@@ -27,4 +28,9 @@ type Auctions struct {
 	CreatedAt      time.Time `json:"created_at"`
 	NftName        string    `json:"nft_name"`
 	NftCreator     string    `json:"nft_creator"`
+}
+
+type AuctionsResp struct {
+	Result interface{} `json:"result"`
+	Count  int64       `json:"count"`
 }
