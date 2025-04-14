@@ -61,7 +61,7 @@ func UserLogin(ctx context.Context, svcCtx *svc.ServerCtx, req types.LoginReq) (
 	// 查询用户信息
 	var user base.User
 	db := svcCtx.DB.WithContext(ctx).Table(base.UserTableName()).
-		Select("id,address,is_allowed").
+		Select("user_id,address,is_allowed").
 		Where("address = ?", req.Address).
 		Find(&user)
 	if db.Error != nil {
@@ -72,11 +72,15 @@ func UserLogin(ctx context.Context, svcCtx *svc.ServerCtx, req types.LoginReq) (
 	if user.Id == 0 {
 		now := time.Now().UnixMilli()
 		user := &base.User{
-			Address:    req.Address,
-			IsAllowed:  true,
-			IsSigned:   true,
-			CreateTime: now,
-			UpdateTime: now,
+			Address:      req.Address,
+			IsAllowed:    true,
+			IsSigned:     true,
+			CreateTime:   now,
+			UpdateTime:   now,
+			LastLoginAt:  now,
+			Username:     req.Address,
+			Email:        "Email",
+			PasswordHash: "PasswordHash",
 		}
 		if err := svcCtx.DB.WithContext(ctx).Table(base.UserTableName()).
 			Create(user).Error; err != nil {
