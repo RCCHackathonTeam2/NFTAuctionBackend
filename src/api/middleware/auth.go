@@ -68,10 +68,10 @@ func AuthMiddleWare(ctx *xkv.Store) gin.HandlerFunc {
 	}
 }
 
-func GetAuthUserAddress(c *gin.Context, ctx *xkv.Store) ([]string, error) {
+func GetAuthUserAddress(c *gin.Context, ctx *xkv.Store) (string, error) {
 	values := c.Request.Header.Get("session_id")
 	if values == "" {
-		return nil, errors.New("failed on get token")
+		return "", errors.New("failed on get token")
 	}
 
 	sessionIDs := strings.Split(values, ",")
@@ -79,31 +79,31 @@ func GetAuthUserAddress(c *gin.Context, ctx *xkv.Store) ([]string, error) {
 	for _, sessionID := range sessionIDs {
 		encryptCode, err := hex.DecodeString(sessionID)
 		if err != nil {
-			return nil, errors.Wrap(err, "failed on decode cookie")
+			return "", errors.Wrap(err, "failed on decode cookie")
 		}
 
 		//解密
 		decrptCode, err := AesDecryptOFB(encryptCode, []byte(CR_LOGIN_SALT))
 		if err != nil {
-			return nil, errors.Wrap(err, "invalid cookie")
+			return "", errors.Wrap(err, "invalid cookie")
 		}
 		//从redis里取数据
 		result, err := ctx.Get(string(decrptCode))
 		if result == "" || err != nil {
-			return nil, errors.Wrap(err, "failed on read cookie from cache")
+			return "", errors.Wrap(err, "failed on read cookie from cache")
 		}
 		arr := strings.Split(string(decrptCode), CR_LOGIN_KEY+":")
 		if len(arr) != 2 {
-			return nil, errors.New("user cache info format err")
+			return "", errors.New("user cache info format err")
 		}
 
 		if arr[1] == "" {
-			return nil, errors.New("invalid user address")
+			return "", errors.New("invalid user address")
 		}
 		addrs = append(addrs, arr[1])
 	}
 
-	return addrs, nil
+	return addrs[1], nil
 }
 
 func AesDecryptOFB(data []byte, key []byte) ([]byte, error) {

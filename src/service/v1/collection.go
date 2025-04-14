@@ -781,7 +781,8 @@ func GetCollectionDetail(ctx context.Context, svcCtx *svc.ServerCtx, chain strin
 	}, nil
 }
 
-func CreateNft(ctx context.Context, svcCtx *svc.ServerCtx, chain int, categorie string, royaltyPercentage string, imageUrl string, description string, name string) (*types.CreateNftResp, error) {
+func CreateNft(ctx context.Context, svcCtx *svc.ServerCtx, chain int, categorie string, royaltyPercentage string,
+	imageUrl string, description string, name string, currentUserAddress string) (*types.CreateNftResp, error) {
 	newNFT := multi.Nft{
 		NftId:             1,
 		TokenId:           "",
@@ -793,8 +794,8 @@ func CreateNft(ctx context.Context, svcCtx *svc.ServerCtx, chain int, categorie 
 		ImagUrl:           imageUrl,
 		ThumbnailUrl:      imageUrl,
 		MetadataUrl:       imageUrl,
-		CreatorId:         "",
-		OwnerId:           "",
+		CreatorId:         currentUserAddress,
+		OwnerId:           currentUserAddress,
 		RoyaltyPercentage: royaltyPercentage,
 		TokenStandard:     "ERC721",
 		TotalSupply:       1,

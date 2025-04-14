@@ -2,6 +2,7 @@ package v1
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/v1"
 	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/types/v1"
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/errcode"
@@ -12,10 +13,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 
+	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/api/middleware"
+	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/logger/xzap"
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/xhttp"
-
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
 )
 
 // CollectionItemsHandler godoc
@@ -551,6 +552,8 @@ type CreateNftRequest struct {
 func CreateNft(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 	return func(c *gin.Context) {
 
+		currentUserAddress, _ := middleware.GetAuthUserAddress(c, svcCtx.KvStore)
+		fmt.Println(currentUserAddress, "我看看看看")
 		//req := new(CreateNftRequest)
 		name := c.Query("name")
 		if name == "" {
@@ -585,7 +588,7 @@ func CreateNft(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 			return
 		}
 
-		res, err := service.CreateNft(c.Request.Context(), svcCtx, int(chainId), categorieId, royaltyPercentage, imageUrl, description, name)
+		res, err := service.CreateNft(c.Request.Context(), svcCtx, int(chainId), categorieId, royaltyPercentage, imageUrl, description, name, currentUserAddress)
 		if err != nil {
 			xhttp.Error(c, errcode.ErrUnexpected)
 			return
