@@ -103,7 +103,7 @@ func GetAuthUserAddress(c *gin.Context, ctx *xkv.Store) (string, error) {
 		addrs = append(addrs, arr[1])
 	}
 
-	return addrs[1], nil
+	return addrs[0], nil
 }
 
 func AesDecryptOFB(data []byte, key []byte) ([]byte, error) {

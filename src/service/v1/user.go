@@ -70,14 +70,13 @@ func UserLogin(ctx context.Context, svcCtx *svc.ServerCtx, req types.LoginReq) (
 
 	// 如果用户不存在则创建新用户
 	if user.Id == 0 {
-		now := time.Now().UnixMilli()
 		user := &base.User{
 			Address:      req.Address,
 			IsAllowed:    true,
 			IsSigned:     true,
-			CreateTime:   now,
-			UpdateTime:   now,
-			LastLoginAt:  now,
+			CreateTime:   time.Now(),
+			UpdateTime:   time.Now(),
+			LastLoginAt:  time.Now(),
 			Username:     req.Address,
 			Email:        "Email",
 			PasswordHash: "PasswordHash",

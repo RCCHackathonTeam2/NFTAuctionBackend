@@ -41,6 +41,9 @@ version= "1"
 contract= "0xe3Fe84daB5DA94bd6309B63B34B49F6bF9d67D8C"
 fee=100
 
+[contract_address]
+nftAuction_address = "0x2Ac3d1FED9531A7d384eD41bb1bd4a12563c1f18"# undeploy
+
 [image_cfg]
 valid_file_type = [".jpeg", ".gif", ".png", ".mp4", ".jpg", ".glb", ".gltf", ".mp3", ".wav", ".svg"]
 time_out = 40

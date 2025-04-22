@@ -15,11 +15,12 @@ type Config struct {
 	ProjectCfg *ProjectCfg     `toml:"project_cfg" mapstructure:"project_cfg" json:"project_cfg"`
 	Log        logging.LogConf `toml:"log" json:"log"`
 	//ImageCfg       *image.Config     `toml:"image_cfg" mapstructure:"image_cfg" json:"image_cfg"`
-	DB             gdb.Config        `toml:"db" json:"db"`
-	Kv             *KvConf           `toml:"kv" json:"kv"`
-	Evm            *erc.NftErc       `toml:"evm" json:"evm"`
-	MetadataParse  *MetadataParse    `toml:"metadata_parse" mapstructure:"metadata_parse" json:"metadata_parse"`
-	ChainSupported []*ChainSupported `toml:"chain_supported" mapstructure:"chain_supported" json:"chain_supported"`
+	DB              gdb.Config        `toml:"db" json:"db"`
+	Kv              *KvConf           `toml:"kv" json:"kv"`
+	Evm             *erc.NftErc       `toml:"evm" json:"evm"`
+	MetadataParse   *MetadataParse    `toml:"metadata_parse" mapstructure:"metadata_parse" json:"metadata_parse"`
+	ChainSupported  []*ChainSupported `toml:"chain_supported" mapstructure:"chain_supported" json:"chain_supported"`
+	ContractAddress *ContractAddress  `toml:"contract_address" mapstructure:"contract_address" json:"contract_address"`
 }
 
 type ProjectCfg struct {
@@ -54,6 +55,10 @@ type ChainSupported struct {
 	Name     string `toml:"name" mapstructure:"name" json:"name"`
 	ChainID  int    `toml:"chain_id" mapstructure:"chain_id" json:"chain_id"`
 	Endpoint string `toml:"endpoint" mapstructure:"endpoint" json:"endpoint"`
+}
+
+type ContractAddress struct {
+	NftAuctionAddress string `toml:"nftAuction_address" mapstructure:"nftAuction_address" json:"nftAuction_address"`
 }
 
 // UnmarshalConfig unmarshal conifg file

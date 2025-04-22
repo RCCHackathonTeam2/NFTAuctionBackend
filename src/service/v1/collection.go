@@ -784,9 +784,7 @@ func GetCollectionDetail(ctx context.Context, svcCtx *svc.ServerCtx, chain strin
 func CreateNft(ctx context.Context, svcCtx *svc.ServerCtx, chain int, categorie string, royaltyPercentage string,
 	imageUrl string, description string, name string, currentUserAddress string) (*types.CreateNftResp, error) {
 	newNFT := multi.Nft{
-		NftId:             1,
-		TokenId:           "",
-		ContractAddress:   "",
+		ContractAddress:   svcCtx.C.ContractAddress.NftAuctionAddress,
 		ChainId:           int64(chain),
 		Category:          categorie,
 		Name:              name,
@@ -806,11 +804,11 @@ func CreateNft(ctx context.Context, svcCtx *svc.ServerCtx, chain int, categorie 
 		Status:            "",
 	}
 
-	isSuccess, err := svcCtx.Dao.CreateNft(ctx, newNFT)
+	isSuccess, nftId, err := svcCtx.Dao.CreateNft(ctx, newNFT)
 	if err != nil {
 		xzap.WithContext(ctx).Error("failed on CreateNft", zap.Error(err))
 	}
-	return &types.CreateNftResp{Result: isSuccess}, nil
+	return &types.CreateNftResp{Result: isSuccess, NftId: nftId}, nil
 }
 
 // RefreshItemMetadata refresh item meta data.

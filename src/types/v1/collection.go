@@ -139,6 +139,7 @@ type CollectionDetailResp struct {
 
 type CreateNftResp struct {
 	Result interface{} `json:"result"`
+	NftId  int64       `json:"nftId"`
 }
 
 type CommonResp struct {
