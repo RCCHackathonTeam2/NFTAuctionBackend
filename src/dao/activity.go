@@ -13,7 +13,7 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/types/v1"
+	"NFTAuctionBackend/src/types/v1"
 )
 
 const CacheActivityNumPrefix = "cache:es:activity:count:"

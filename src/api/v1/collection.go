@@ -1,20 +1,20 @@
 package v1
 
 import (
+	"NFTAuctionBackend/src/service/v1"
+	"NFTAuctionBackend/src/types/v1"
 	"encoding/json"
 	"fmt"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/v1"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/types/v1"
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/errcode"
 
-	//"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/errcode"
+	//"NFTAuctionBackend/src/errcode"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/api/middleware"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
+	"NFTAuctionBackend/src/api/middleware"
+	"NFTAuctionBackend/src/service/svc"
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/logger/xzap"
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/xhttp"
 )

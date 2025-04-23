@@ -7,8 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/config"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
+	"NFTAuctionBackend/src/config"
+	"NFTAuctionBackend/src/service/svc"
 )
 
 type Platform struct {

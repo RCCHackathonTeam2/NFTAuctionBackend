@@ -6,9 +6,9 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/api/middleware"
+	"NFTAuctionBackend/src/api/middleware"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
+	"NFTAuctionBackend/src/service/svc"
 )
 
 func NewRouter(svcCtx *svc.ServerCtx) *gin.Engine {

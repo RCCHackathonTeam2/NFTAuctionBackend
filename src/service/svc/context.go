@@ -13,8 +13,8 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"gorm.io/gorm"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/config"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/dao"
+	"NFTAuctionBackend/src/config"
+	"NFTAuctionBackend/src/dao"
 )
 
 type ServerCtx struct {

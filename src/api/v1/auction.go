@@ -7,9 +7,9 @@ import (
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/xhttp"
 	"github.com/gin-gonic/gin"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/v1"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/types/v1"
+	"NFTAuctionBackend/src/service/svc"
+	"NFTAuctionBackend/src/service/v1"
+	"NFTAuctionBackend/src/types/v1"
 )
 
 func AuctionsHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {
@@ -28,6 +28,38 @@ func AuctionsHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 		}
 
 		res, err := service.GetAuctions(c.Request.Context(), svcCtx, filter.Category, filter.AuctionType, filter.ChainId, filter.MinPrice, filter.MaxPrice, filter.OrderBy, filter.Page, filter.PageSize)
+		if err != nil {
+			xhttp.Error(c, errcode.NewCustomErr(err.Error()))
+			return
+		}
+		xhttp.OkJson(c, res)
+	}
+}
+
+func AuctionDetailHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		filterParam := c.Query("filters")
+		if filterParam == "" {
+			xhttp.Error(c, errcode.NewCustomErr("Filter param is nil."))
+			return
+		}
+
+		var filter types.AuctionDetailParam
+		err := json.Unmarshal([]byte(filterParam), &filter)
+		if err != nil {
+			xhttp.Error(c, errcode.NewCustomErr("Filter param is nil."))
+			return
+		}
+		if filter.AuctionId <= 0 || filter.ChainId <= 0 || filter.TokenId == "" || filter.ContractAddress == "" {
+			xhttp.Error(c, errcode.NewCustomErr("Invalid params."))
+			return
+		}
+		Chain, ok := chainIDToChain[filter.ChainId]
+		if !ok {
+			xhttp.Error(c, errcode.ErrInvalidParams)
+			return
+		}
+		res, err := service.GetAuctionDetail(c.Request.Context(), svcCtx, filter.AuctionId, filter.ChainId, Chain, filter.TokenId, filter.ContractAddress)
 		if err != nil {
 			xhttp.Error(c, errcode.NewCustomErr(err.Error()))
 			return

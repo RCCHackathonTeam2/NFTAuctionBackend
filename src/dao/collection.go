@@ -11,7 +11,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/shopspring/decimal"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/types/v1"
+	"NFTAuctionBackend/src/types/v1"
 )
 
 const MaxBatchReadCollections = 500

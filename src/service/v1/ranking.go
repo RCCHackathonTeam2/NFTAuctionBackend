@@ -12,9 +12,9 @@ import (
 	"github.com/shopspring/decimal"
 	"go.uber.org/zap"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/dao"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/types/v1"
+	"NFTAuctionBackend/src/dao"
+	"NFTAuctionBackend/src/service/svc"
+	"NFTAuctionBackend/src/types/v1"
 )
 
 const MinuteSeconds = 60

@@ -1,11 +1,11 @@
 package main
 
 import (
+	"NFTAuctionBackend/src/api/router"
+	"NFTAuctionBackend/src/app"
+	"NFTAuctionBackend/src/config"
+	"NFTAuctionBackend/src/service/svc"
 	"flag"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/api/router"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/app"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/config"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )

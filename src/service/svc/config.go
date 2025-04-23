@@ -6,7 +6,7 @@ import (
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/stores/xkv"
 	"gorm.io/gorm"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/dao"
+	"NFTAuctionBackend/src/dao"
 )
 
 type CtxConfig struct {

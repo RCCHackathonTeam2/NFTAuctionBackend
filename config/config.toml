@@ -1,8 +1,9 @@
 [project_cfg]
-name = "NFTAuction"
+name = "NFTAuctionBackend"
 
 [api]
 port = ":80"
+#port = ":8088"
 max_num = 500
 
 [log]

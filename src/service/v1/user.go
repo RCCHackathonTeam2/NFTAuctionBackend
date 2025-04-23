@@ -17,9 +17,9 @@ import (
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/api/middleware"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/types/v1"
+	"NFTAuctionBackend/src/api/middleware"
+	"NFTAuctionBackend/src/service/svc"
+	"NFTAuctionBackend/src/types/v1"
 )
 
 func getUserLoginMsgCacheKey(address string) string {

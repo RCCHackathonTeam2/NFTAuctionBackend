@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/logger/xzap"
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/stores/gdb/orderbookmodel/multi"
+	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )
 
@@ -26,4 +27,15 @@ func (d *Dao) CreateNft(ctx context.Context, newNFT multi.Nft) (bool, int64, err
 
 	xzap.WithContext(ctx).Info("插入成功", zap.Int64("nft_id", newNFT.NftId))
 	return true, newNFT.NftId, nil
+}
+
+func (d *Dao) QueryNftAttributes(ctx context.Context, TokenId string) ([]multi.NftAttributes, error) {
+	var nftAttributes []multi.NftAttributes
+	db := d.DB.WithContext(ctx).Table("nft_attributes").
+		Select("attribute_id, token_id, trait_type, trait_value, display_type, rarity_percentage, created_at").
+		Where("token_id = ?", TokenId)
+	if err := db.Scan(&nftAttributes).Error; err != nil {
+		return nil, errors.Wrap(err, "failed on get NftAttributes")
+	}
+	return nftAttributes, nil
 }

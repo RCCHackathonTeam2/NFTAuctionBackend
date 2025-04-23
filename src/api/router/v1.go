@@ -3,9 +3,9 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/api/middleware"
-	v1 "github.com/RCCHackathonTeam2/NFTAuctionBackend/src/api/v1"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
+	"NFTAuctionBackend/src/api/middleware"
+	v1 "NFTAuctionBackend/src/api/v1"
+	"NFTAuctionBackend/src/service/svc"
 )
 
 func loadV1(r *gin.Engine, svcCtx *svc.ServerCtx) {
@@ -63,8 +63,9 @@ func loadV1(r *gin.Engine, svcCtx *svc.ServerCtx) {
 		uploadFile.POST("/uploadNftFile", v1.UploadHandler(svcCtx))
 	}
 
-	auctions := apiV1.Group("/auctions").Use(middleware.AuthMiddleWare(svcCtx.KvStore))
+	auctions := apiV1.Group("/auctions")
 	{
-		auctions.GET("", v1.AuctionsHandler(svcCtx)) // 批量查询拍卖信息
+		auctions.GET("", v1.AuctionsHandler(svcCtx))             // 批量查询拍卖信息
+		auctions.GET("/detail", v1.AuctionDetailHandler(svcCtx)) // 查询拍卖详情
 	}
 }

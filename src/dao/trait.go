@@ -6,7 +6,7 @@ import (
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/stores/gdb/orderbookmodel/multi"
 	"github.com/pkg/errors"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/types/v1"
+	"NFTAuctionBackend/src/types/v1"
 )
 
 // QueryItemTraits 查询单个NFT Item的 Trait信息

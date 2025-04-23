@@ -5,7 +5,7 @@
 ### 准备条件
 
 1. 确保将下面三个 repo 都pull同一个本地目录
-    - https://github.com/RCCHackathonTeam2/NFTAuctionBackend
+    - https://NFTAuctionBackend
     - https://github.com/RCCHackathonTeam2/NFTAuctionBase
     - https://github.com/ProjectsTask/EasySwapSync
     -- EasySwapBackend

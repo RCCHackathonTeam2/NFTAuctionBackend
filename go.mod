@@ -1,4 +1,4 @@
-module github.com/RCCHackathonTeam2/NFTAuctionBackend
+module NFTAuctionBackend
 
 go 1.23.4
 

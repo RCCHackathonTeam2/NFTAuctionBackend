@@ -11,9 +11,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/v1"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/types/v1"
+	"NFTAuctionBackend/src/service/svc"
+	"NFTAuctionBackend/src/service/v1"
+	"NFTAuctionBackend/src/types/v1"
 )
 
 // TopRankingHandler 处理获取排名前列的NFT集合的请求

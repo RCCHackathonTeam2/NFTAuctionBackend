@@ -11,7 +11,7 @@ import (
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/types/v1"
+	"NFTAuctionBackend/src/types/v1"
 )
 
 const CacheRefreshSingleItemMetadataKey = "cache:%s:%s:item:refresh:metadata"

@@ -7,9 +7,9 @@ import (
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/xhttp"
 	"github.com/gin-gonic/gin"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/v1"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/types/v1"
+	"NFTAuctionBackend/src/service/svc"
+	"NFTAuctionBackend/src/service/v1"
+	"NFTAuctionBackend/src/types/v1"
 )
 
 func UserMultiChainCollectionsHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {

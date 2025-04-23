@@ -1,8 +1,8 @@
 package v1
 
 import (
+	"NFTAuctionBackend/src/service/svc"
 	"fmt"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
 	"net/http"
 	"path/filepath"
 	"time"

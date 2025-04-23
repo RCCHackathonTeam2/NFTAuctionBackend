@@ -16,10 +16,10 @@ import (
 	"github.com/shopspring/decimal"
 	"go.uber.org/zap"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/dao"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/mq"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/types/v1"
+	"NFTAuctionBackend/src/dao"
+	"NFTAuctionBackend/src/service/mq"
+	"NFTAuctionBackend/src/service/svc"
+	"NFTAuctionBackend/src/types/v1"
 )
 
 func GetBids(ctx context.Context, svcCtx *svc.ServerCtx, chain string, collectionAddr string, page, pageSize int) (*types.CollectionBidsResp, error) {

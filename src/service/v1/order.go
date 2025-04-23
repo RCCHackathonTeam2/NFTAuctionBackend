@@ -7,8 +7,8 @@ import (
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/stores/gdb/orderbookmodel/multi"
 	"github.com/pkg/errors"
 
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/service/svc"
-	"github.com/RCCHackathonTeam2/NFTAuctionBackend/src/types/v1"
+	"NFTAuctionBackend/src/service/svc"
+	"NFTAuctionBackend/src/types/v1"
 )
 
 // GetOrderInfos 获取订单信息
