@@ -3,10 +3,6 @@ package service
 import (
 	"context"
 	"fmt"
-	"strings"
-	"sync"
-	"time"
-
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/errcode"
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/evm/eip"
 	"github.com/RCCHackathonTeam2/NFTAuctionBase/logger/xzap"
@@ -15,6 +11,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/shopspring/decimal"
 	"go.uber.org/zap"
+	"strings"
+	"sync"
 
 	"NFTAuctionBackend/src/dao"
 	"NFTAuctionBackend/src/service/mq"
@@ -779,37 +777,6 @@ func GetCollectionDetail(ctx context.Context, svcCtx *svc.ServerCtx, chain strin
 	return &types.CollectionDetailResp{
 		Result: detail,
 	}, nil
-}
-
-func CreateNft(ctx context.Context, svcCtx *svc.ServerCtx, chain int, categorie string, royaltyPercentage string,
-	imageUrl string, description string, name string, currentUserAddress string, tokenId string) (*types.CreateNftResp, error) {
-	newNFT := multi.Nft{
-		TokenId:           tokenId,
-		ContractAddress:   svcCtx.C.ContractAddress.NftAuctionAddress,
-		ChainId:           int64(chain),
-		Category:          categorie,
-		Name:              name,
-		Description:       description,
-		ImagUrl:           imageUrl,
-		ThumbnailUrl:      imageUrl,
-		MetadataUrl:       imageUrl,
-		CreatorId:         currentUserAddress,
-		OwnerId:           currentUserAddress,
-		RoyaltyPercentage: royaltyPercentage,
-		TokenStandard:     "ERC721",
-		TotalSupply:       1,
-		IsMinted:          0,
-		MintedAt:          time.Now().Unix(),
-		CreatedAt:         time.Now().Unix(),
-		UpdatedAt:         time.Now().Unix(),
-		Status:            "",
-	}
-
-	isSuccess, nftId, err := svcCtx.Dao.CreateNft(ctx, newNFT)
-	if err != nil {
-		xzap.WithContext(ctx).Error("failed on CreateNft", zap.Error(err))
-	}
-	return &types.CreateNftResp{Result: isSuccess, NftId: nftId}, nil
 }
 
 // RefreshItemMetadata refresh item meta data.
