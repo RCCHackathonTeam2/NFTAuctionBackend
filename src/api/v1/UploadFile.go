@@ -4,6 +4,7 @@ import (
 	"NFTAuctionBackend/src/service/svc"
 	"fmt"
 	"net/http"
+	"os"
 	"path/filepath"
 	"time"
 
@@ -75,7 +76,7 @@ func UploadHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 		// 返回成功响应
 		c.JSON(http.StatusOK, gin.H{
 			"status": "success",
-			"path":   filePath,
+			"path":   "./" + filePath,
 		})
 	}
 }
@@ -90,4 +91,54 @@ func isAllowedFormat(ext string) bool {
 		".mp3": true,
 	}
 	return allowed[ext]
+}
+
+// @Description  图片回显接口
+// GetFile 获取并返回指定路径的文件内容
+// @Summary 获取文件内容
+// @Tags 文件操作
+// @Accept json
+// @Produce octet-stream
+// @Produce json
+// @Param path query string true "文件路径" Example("./uploads/example.jpg")
+// @Success 200 {file} file "文件内容"
+// @Failure 400 {object} map[string]interface{} "缺少path参数"
+// @Failure 500 {object} map[string]interface{} "文件操作失败"
+// @Router       /uploadFile/uploadNftFile [post]
+func GetFile(svcCtx *svc.ServerCtx) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// 获取前端传入的图片URL
+		filePath := c.Query("path")
+		if filePath == "" {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "path parameter is required"})
+			return
+		}
+
+		// 打开文件
+		file, err := os.Open(filePath)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to open file: " + err.Error()})
+			return
+		}
+		defer file.Close()
+
+		// 读取文件头信息判断文件类型
+		buffer := make([]byte, 512)
+		_, err = file.Read(buffer)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to read file: " + err.Error()})
+			return
+		}
+		contentType := http.DetectContentType(buffer)
+
+		// 重置文件指针
+		_, err = file.Seek(0, 0)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to reset file pointer: " + err.Error()})
+			return
+		}
+
+		// 回显文件
+		c.DataFromReader(http.StatusOK, -1, contentType, file, nil)
+	}
 }

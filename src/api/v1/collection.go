@@ -539,6 +539,7 @@ type CreateNftRequest struct {
 // @Tags collections
 // @Accept json
 // @Produce json
+// @Param tokenId query string true "tokenId"
 // @Param name query string true "nft名称"
 // @Param description query string true "NFT描述"
 // @Param imageUrl query string true "NFT图片URL"
@@ -588,7 +589,13 @@ func CreateNft(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 			return
 		}
 
-		res, err := service.CreateNft(c.Request.Context(), svcCtx, int(chainId), categorieId, royaltyPercentage, imageUrl, description, name, currentUserAddress)
+		tokenId := c.Query("tokenId")
+		if tokenId == "" {
+			xhttp.Error(c, errcode.NewCustomErr("tokenId param is nil."))
+			return
+		}
+
+		res, err := service.CreateNft(c.Request.Context(), svcCtx, int(chainId), categorieId, royaltyPercentage, imageUrl, description, name, currentUserAddress, tokenId)
 		if err != nil {
 			xhttp.Error(c, errcode.ErrUnexpected)
 			return

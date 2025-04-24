@@ -782,8 +782,9 @@ func GetCollectionDetail(ctx context.Context, svcCtx *svc.ServerCtx, chain strin
 }
 
 func CreateNft(ctx context.Context, svcCtx *svc.ServerCtx, chain int, categorie string, royaltyPercentage string,
-	imageUrl string, description string, name string, currentUserAddress string) (*types.CreateNftResp, error) {
+	imageUrl string, description string, name string, currentUserAddress string, tokenId string) (*types.CreateNftResp, error) {
 	newNFT := multi.Nft{
+		TokenId:           tokenId,
 		ContractAddress:   svcCtx.C.ContractAddress.NftAuctionAddress,
 		ChainId:           int64(chain),
 		Category:          categorie,
