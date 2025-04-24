@@ -11,7 +11,7 @@ import (
 
 func (d *Dao) CreateNft(ctx context.Context, newNFT multi.Nft) (bool, int64, error) {
 	// 开启 Debug 模式打印 SQL
-	db := d.DB.WithContext(ctx).Debug().Table(multi.NftTableName(""))
+	db := d.DB.WithContext(ctx).Debug().Table(multi.NftTableName())
 
 	// 执行插入（移除了冲突策略以验证问题）
 	result := db.Create(&newNFT)
